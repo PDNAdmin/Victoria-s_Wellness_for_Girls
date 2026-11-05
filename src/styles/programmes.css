@@ -1,0 +1,154 @@
+/* ============================================================
+   PROGRAMMES
+   Left: heading, intro and one photo, held in view (sticky).
+   Right: all seven programmes as a readable list. The row in the
+   middle of the screen gets a soft highlight. Feeling: clarity.
+   ============================================================ */
+.programmes {
+  padding-block: var(--section-y);
+}
+
+.programmes__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 460px) minmax(0, 620px);
+  justify-content: space-between;
+  align-items: start;
+  gap: clamp(2rem, 5vw, 5rem);
+}
+
+/* ---------- Left column ---------- */
+/* The column must be as tall as the list, or the sticky block has no room to travel */
+.programmes__aside { align-self: stretch; }
+.programmes__sticky {
+  position: sticky;
+  top: calc(76px + var(--s-6));
+}
+.programmes__title { font-size: var(--fs-h1); line-height: 1.1; }
+.programmes__intro {
+  margin-top: var(--head-gap);
+  max-width: 30ch;
+  font-size: var(--fs-body-l);
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+.programmes__media { margin: var(--s-7) 0 0; }
+.programmes__photo {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--r-3);
+  overflow: hidden;
+  background: var(--rose-200) url("../../media/programmes-lqip.jpg") center / cover no-repeat;
+  box-shadow: var(--shadow-1);
+}
+.programmes__photo picture, .programmes__photo img { width: 100%; height: 100%; }
+.programmes__photo img { object-fit: cover; object-position: 50% 30%; }
+.programmes__caption {
+  display: flex; align-items: baseline; gap: .6rem;
+  margin-top: var(--s-4);
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+}
+.programmes__caption::before {
+  content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--rose-600); transform: translateY(-1px);
+}
+
+/* ---------- The list ---------- */
+.prog-list { list-style: none; margin: 0; padding: 0; }
+
+.prog {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: var(--s-5);
+  padding: var(--s-6) var(--s-5);
+  border-radius: var(--r-2);
+  border-bottom: 1px solid var(--line);
+  transition: background-color var(--dur-3) var(--ease-gentle), border-color var(--dur-3) var(--ease-gentle);
+}
+.prog:last-child { border-bottom-color: transparent; }
+@media (hover: hover) and (pointer: fine) {
+  .prog:hover { background: var(--cream-50); border-bottom-color: transparent; box-shadow: var(--shadow-1); }
+  .prog:hover .prog__icon { background: var(--green-700); }
+  .prog:hover .prog__icon svg { stroke: var(--on-green); }
+  .prog--girls:hover { background: #FFF7F8; }
+  .prog--girls:hover .prog__icon { background: var(--rose-600); }
+}
+
+.prog__icon {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--sage-100);
+  display: grid; place-items: center;
+  transition: background-color var(--dur-3) var(--ease-gentle);
+}
+.prog__icon svg {
+  width: 28px; height: 28px;
+  fill: none; stroke: var(--green-700); stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round;
+  transition: stroke var(--dur-3) var(--ease-gentle);
+}
+
+.prog__head {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: var(--s-2) var(--s-3);
+}
+.prog__name { font-size: var(--fs-h3); line-height: 1.2; }
+.prog__text { margin-top: var(--s-3); max-width: 52ch; }
+.prog__for {
+  margin-top: var(--s-4);
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+}
+.prog__for span {
+  font-weight: 700;
+  color: var(--ink-900);
+  margin-right: .35rem;
+}
+.prog__actions { display: flex; flex-wrap: wrap; column-gap: var(--s-5); }
+.prog__actions .link-arrow { margin-top: var(--s-2); }
+
+/* Status labels: always a word, colour is only a hint */
+.status {
+  display: inline-flex; align-items: center; gap: .4rem;
+  min-height: 28px; padding: 0 .7rem;
+  border-radius: var(--r-pill);
+  border: 1px solid currentColor;
+  font-size: var(--fs-label); font-weight: 700;
+  white-space: nowrap;
+}
+.status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.status--now { color: var(--ok); }
+.status--partner { color: var(--info); }
+
+/* Girls' programme: the rose accent from the design system */
+.prog--girls .prog__icon { background: var(--rose-200); }
+.prog--girls .prog__icon svg { stroke: var(--rose-700); }
+
+/* ---------- Availability note ---------- */
+.programmes__note {
+  display: flex; gap: var(--s-3); align-items: flex-start;
+  margin-top: var(--s-7);
+  padding: var(--s-6);
+  border-radius: var(--r-2);
+  background: var(--sage-100);
+  font-size: var(--fs-small);
+  color: var(--ink-900);
+}
+.programmes__note svg {
+  flex: none; width: 22px; height: 22px; margin-top: 2px;
+  fill: none; stroke: var(--info); stroke-width: 2; stroke-linecap: round;
+}
+
+/* ---------- Short screens: the left column cannot fit, so it scrolls normally ---------- */
+@media (max-height: 740px) {
+  .programmes__sticky { position: static; }
+}
+
+/* ---------- Tablet and phone ---------- */
+@media (max-width: 899px) {
+  .programmes__grid { grid-template-columns: minmax(0, 1fr); gap: var(--block-gap); }
+  .programmes__sticky { position: static; }
+  .programmes__media { max-width: 560px; }
+}
+@media (max-width: 560px) {
+  .prog { grid-template-columns: minmax(0, 1fr); gap: var(--s-4); padding: var(--s-6) var(--s-4); }
+  .prog__icon { width: 48px; height: 48px; }
+  .programmes__photo { border-radius: var(--r-2); }
+}

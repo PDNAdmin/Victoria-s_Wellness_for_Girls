@@ -1,0 +1,129 @@
+/* ============================================================
+   WHERE WE WORK
+   Typographic: the communities as stops on a route that draws
+   itself with the scroll. Ends at the visitor's own community.
+   ============================================================ */
+.where {
+  background: var(--cream-200);
+  padding-block: var(--section-y);
+}
+
+.where__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 440px) minmax(0, 560px);
+  justify-content: space-between;
+  align-items: start;
+  gap: clamp(2rem, 5vw, 5rem);
+}
+
+.where__text { align-self: center; }
+.where__title { font-size: clamp(2rem, 1.3rem + 2vw, 3rem); line-height: 1.12; }
+.where__body {
+  margin-top: var(--head-gap);
+  max-width: 40ch;
+  font-size: var(--fs-body-l);
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+/* ---------- The route ---------- */
+.route {
+  --dot: 18px;
+  --rail-x: 8px; /* centre of the dots */
+  position: relative;
+  padding-left: calc(var(--dot) + var(--s-6));
+}
+
+/* Rail: a faint full-length track, and the filled part that grows */
+/* top and height are measured by src/route.js so the rail runs exactly
+   from the first dot to the "your community" circle */
+.route__line {
+  position: absolute;
+  left: calc(var(--rail-x) - 1px);
+  top: var(--rail-top, 30px);
+  height: var(--rail-h, 0px);
+  width: 2px;
+  border-radius: 2px;
+  background: var(--line);
+}
+.route__fill {
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  background: var(--green-600);
+  transform-origin: 50% 0;
+}
+
+.route__list { list-style: none; margin: 0; padding: 0; }
+
+.route__stop {
+  position: relative;
+  padding-block: var(--s-5);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.625rem, 1.2rem + 1.4vw, 2.375rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--ink-900);
+  transition: color var(--dur-3) var(--ease-gentle);
+}
+.route__stop span { color: var(--text-muted); font-weight: 500; }
+
+/* Dot on the rail */
+.route__stop::before {
+  content: "";
+  position: absolute;
+  left: calc(-1 * (var(--dot) + var(--s-6)));
+  top: calc(var(--s-5) + .62em - var(--dot) / 2);
+  width: var(--dot); height: var(--dot);
+  border-radius: 50%;
+  box-sizing: border-box;
+  border: 2px solid var(--green-600);
+  background: var(--green-600);
+  transition: background-color var(--dur-3) var(--ease-gentle), transform var(--dur-3) var(--ease-spring);
+}
+
+/* The last stop: the visitor's community, still open */
+.route__next {
+  position: relative;
+  margin-top: var(--s-6);
+  padding-top: var(--s-2);
+}
+.route__next::before {
+  content: "";
+  position: absolute;
+  left: calc(-1 * (var(--dot) + var(--s-6)) - 4px);
+  top: var(--s-2);
+  width: calc(var(--dot) + 8px); height: calc(var(--dot) + 8px);
+  border-radius: 50%;
+  border: 2px dashed var(--rose-600);
+  background: var(--cream-200);
+}
+.route__next-label {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: var(--fs-h3);
+  line-height: 1.2;
+  color: var(--rose-700);
+}
+.route__next .btn { margin-top: var(--s-5); }
+
+/* Motion: stops wait in a quieter state until the line reaches them.
+   Text stays at AA contrast while waiting (ink 700 on cream 200). */
+html.motion .route__fill { transform: scaleY(0); }
+html.motion .route__stop:not(.is-reached) { color: var(--ink-700); }
+html.motion .route__stop:not(.is-reached)::before { background: var(--cream-200); transform: scale(.75); }
+/* The invitation is never hidden; its circle simply warms up when the route arrives */
+.route__next::before { transition: background-color var(--dur-3) var(--ease-gentle), transform var(--dur-4) var(--ease-spring); }
+html.motion .route__next.is-reached::before { background: var(--rose-200); transform: rotate(45deg) scale(1.1); }
+
+/* ---------- Tablet and phone ---------- */
+@media (max-width: 899px) {
+  .where__grid { grid-template-columns: minmax(0, 1fr); gap: var(--block-gap); }
+}
+@media (max-width: 560px) {
+  .route { --dot: 16px; padding-left: calc(var(--dot) + var(--s-5)); }
+  .route__stop::before { left: calc(-1 * (var(--dot) + var(--s-5))); }
+  .route__next::before { left: calc(-1 * (var(--dot) + var(--s-5)) - 4px); }
+  .route__next .btn { width: 100%; }
+}

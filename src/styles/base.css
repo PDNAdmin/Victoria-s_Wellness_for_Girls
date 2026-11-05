@@ -1,0 +1,184 @@
+/* Base rules from the design system (Section 7), plus browser surfaces */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Rhythm: semantic spacing built on the design system's 4px scale.
+   Fluid, so phones get air without inheriting desktop gaps. Every section uses these. */
+:root {
+  --gutter: clamp(20px, 5vw, 48px);                         /* screen edge (was 16px on phones) */
+  --section-y: clamp(5.5rem, 3.5rem + 6vw, 10rem);          /* space above and below each section */
+  --head-gap: clamp(1.5rem, 1.1rem + 1vw, 2.25rem);         /* heading to its first paragraph */
+  --stack: clamp(2rem, 1.5rem + 1.5vw, 3rem);               /* between items inside a block */
+  --block-gap: clamp(4rem, 2.5rem + 4vw, 7rem);             /* between major blocks in a section */
+  --card-pad: clamp(1.75rem, 1rem + 2.5vw, 3.25rem);        /* inside cards and forms */
+  --field-gap: clamp(1.75rem, 1.25rem + 1vw, 2.5rem);       /* between form questions */
+
+  /* Client decision, 5 Nov 2026: a modern sans for headlines, replacing Fraunces.
+     Body text stays Atkinson Hyperlegible for readability. */
+  --font-display: "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+  --tr-display: -0.03em;
+
+  /* Rounded panels: key sections sit as soft cards on the page */
+  --panel-inset: clamp(10px, 2vw, 28px);
+  --panel-gap: clamp(10px, 2vw, 28px);
+  --r-panel: clamp(24px, 3vw, 40px);
+}
+
+.is-panel {
+  margin-block: var(--panel-gap);
+  margin-inline: max(var(--panel-inset), calc((100% - 1480px) / 2));
+  border-radius: var(--r-panel);
+}
+
+/* Small pill label above a heading */
+.eyebrow {
+  display: inline-flex; align-items: center; gap: .5rem;
+  min-height: 32px; padding: 0 .9rem;
+  margin-bottom: var(--s-5);
+  border-radius: var(--r-pill);
+  background: var(--sage-100);
+  color: var(--green-800);
+  font: 700 var(--fs-label)/1 var(--font-body);
+  letter-spacing: .02em;
+}
+.eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--green-600); }
+.eyebrow--dark { background: rgba(207, 224, 214, .14); color: var(--on-green); }
+.eyebrow--dark::before { background: var(--gold-400); }
+
+/* Launch announcement bar, with a thin woven strip as a quiet cultural accent */
+.announce { position: relative; z-index: 60; background: var(--green-900); color: var(--on-green); font-size: var(--fs-small); }
+.announce::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 6px;
+  background:
+    conic-gradient(from -45deg at 50% 100%, var(--gold-400) 90deg, transparent 0) 0 0 / 14px 6px repeat-x,
+    var(--green-900);
+  pointer-events: none; z-index: 1;
+}
+.announce__inner { display: flex; align-items: center; justify-content: space-between; gap: var(--s-4); min-height: 48px; }
+.announce p { line-height: 1.4; padding-block: .6rem; }
+.announce b { color: var(--on-green); }
+.announce__dot { display: inline-block; vertical-align: middle; margin: -2px .6rem 0 4px; width: 8px; height: 8px; border-radius: 50%; background: var(--gold-400); box-shadow: 0 0 0 4px rgba(217, 169, 63, .2); }
+.announce__close {
+  flex: none; width: 40px; height: 40px; border: 0; border-radius: 50%;
+  background: transparent; color: var(--on-green); cursor: pointer;
+  display: grid; place-items: center;
+  transition: background-color var(--dur-1) var(--ease-standard);
+}
+.announce__close:hover { background: rgba(250, 246, 238, .12); }
+.announce__close svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.announce :focus-visible { outline-color: var(--focus-on-dark); }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 88px;
+  background: var(--bg);
+}
+/* Lenis handles smooth scrolling when motion is allowed */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 var(--fs-body)/var(--lh-body) var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+img, svg, video { display: block; max-width: 100%; }
+img { height: auto; }
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: var(--tr-display);
+  line-height: var(--lh-head);
+  margin: 0;
+  text-wrap: balance;
+  font-optical-sizing: auto;
+}
+h1, h2 { font-weight: 700; }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+p { margin: 0; text-wrap: pretty; }
+
+a { color: var(--primary); text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
+
+::selection { background: var(--sage-100); color: var(--ink-900); }
+:focus-visible { outline: var(--focus-ring); outline-offset: 3px; }
+.dark :focus-visible { outline-color: var(--focus-on-dark); }
+
+.wrap { max-width: var(--max); margin: 0 auto; padding-inline: var(--gutter); }
+
+.skip {
+  position: absolute; left: 8px; top: -100px; z-index: 100;
+  background: var(--surface); color: var(--ink-900);
+  padding: .75rem 1rem; border-radius: var(--r-1); font-weight: 700;
+}
+.skip:focus { top: 8px; }
+
+/* ---------- Buttons (design system) ---------- */
+.btn {
+  appearance: none;
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  min-height: var(--tap);
+  padding: 0 1.4rem;
+  border-radius: var(--r-pill);
+  border: 2px solid transparent;
+  font: 700 var(--fs-small)/1 var(--font-body);
+  white-space: nowrap;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background-color var(--dur-1) var(--ease-standard),
+    border-color var(--dur-1) var(--ease-standard),
+    box-shadow var(--dur-2) var(--ease-standard),
+    transform var(--dur-1) var(--ease-standard);
+}
+.btn:active { transform: translateY(1px) scale(.98); }
+.btn-lg { min-height: 56px; padding: 0 1.75rem; font-size: 1.0625rem; }
+.btn-sm { min-height: 44px; padding: 0 1.1rem; }
+
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { background: var(--primary-hover); box-shadow: var(--shadow-1); }
+.btn-primary:active { background: var(--primary-pressed); }
+
+.btn-secondary { background: transparent; border-color: var(--green-700); color: var(--green-700); }
+.btn-secondary:hover { background: var(--sage-100); }
+
+.btn-donate { background: var(--donate); color: var(--on-gold); }
+.btn-donate:hover { background: var(--donate-hover); box-shadow: var(--shadow-1); }
+
+/* Pill buttons with an arrow circle (main actions) */
+.btn--arrow { padding-right: .4rem; gap: .8rem; }
+.btn-sm.btn--arrow { padding-right: .3rem; }
+.btn__arrow {
+  flex: none; width: 38px; height: 38px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--cream-50); color: var(--green-700);
+  transition: transform var(--dur-2) var(--ease-spring);
+}
+.btn__arrow svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.btn-secondary .btn__arrow { background: var(--green-700); color: var(--on-green); }
+.btn-donate .btn__arrow { background: var(--ink-900); color: var(--gold-400); }
+.btn--arrow:hover .btn__arrow { transform: translateX(3px); }
+
+/* Button for dark green bands */
+.btn-on-dark { background: transparent; border-color: var(--on-green); color: var(--on-green); }
+.btn-on-dark:hover { background: var(--green-800); }
+
+/* Read by screen readers, not shown */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+  }
+}

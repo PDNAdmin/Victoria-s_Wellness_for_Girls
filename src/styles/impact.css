@@ -1,0 +1,132 @@
+/* ============================================================
+   IMPACT
+   The first dark green band. Two headline figures, three
+   supporting ones, then the checks offered. Feeling: confidence.
+   ============================================================ */
+.impact {
+  position: relative;
+  overflow: hidden;
+  background: var(--green-900);
+  color: var(--on-green);
+  padding-block: var(--section-y);
+}
+/* Light text on dark: a touch more air and weight (design floor) */
+.impact p, .impact li { line-height: 1.65; }
+
+.impact__decor {
+  position: absolute;
+  right: -4%;
+  top: 6%;
+  width: min(34vw, 420px);
+  pointer-events: none;
+}
+.impact__decor svg {
+  width: 100%;
+  fill: none; stroke: var(--green-800); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round;
+}
+
+.impact__inner { position: relative; }
+
+.impact__title { font-size: var(--fs-h1); color: var(--on-green); }
+.impact__intro {
+  margin-top: var(--s-5);
+  font-size: var(--fs-body-l);
+  color: var(--on-green-muted);
+}
+
+/* Shared hairline that draws in at the top of each block */
+.impact__rule {
+  position: absolute; left: 0; right: 0; top: 0;
+  height: 1px;
+  background: rgba(207, 224, 214, .28);
+  transform-origin: 0 50%;
+}
+
+/* ---------- Figures ---------- */
+.impact__major, .impact__minor, .impact__checks {
+  position: relative;
+  padding-top: var(--stack);
+}
+.impact__major {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--stack);
+  margin-top: var(--block-gap);
+}
+.impact__minor {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--stack);
+  margin-top: var(--block-gap);
+}
+
+.stat__num {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-h1);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums lining-nums;
+  color: var(--on-green);
+}
+.stat__num small {
+  display: block;
+  margin-bottom: var(--s-2);
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  font-weight: 700;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--on-green-muted);
+}
+.stat__label {
+  margin-top: var(--s-3);
+  max-width: 24ch;
+  color: var(--on-green-muted);
+}
+
+.impact__minor .stat__num { line-height: .95; }
+.impact__minor .stat__num small { margin-bottom: var(--s-3); line-height: 1.2; }
+.impact__minor .stat__label { margin-top: var(--s-2); }
+
+/* Fraunces thins its hairlines at large optical sizes; a lower setting keeps numerals sturdy */
+.stat__num { font-optical-sizing: none; font-variation-settings: "opsz" 36; }
+.stat--lg .stat__num { font-size: clamp(4rem, 1.6rem + 8vw, 8.5rem); line-height: .86; letter-spacing: -0.035em; }
+.stat--lg .stat__num small { margin-bottom: var(--s-4); line-height: 1.2; letter-spacing: var(--tr-label); }
+.stat--lg .stat__label { margin-top: var(--s-4); font-size: var(--fs-body-l); color: var(--on-green); }
+/* Girls: the rose accent, as a light tint on dark (well above AA) */
+.stat--girls .stat__num { color: var(--rose-200); }
+
+/* ---------- Checks offered ---------- */
+.impact__checks { margin-top: var(--block-gap); }
+.impact__checks-title {
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--on-green-muted);
+}
+.checks {
+  list-style: none; margin: var(--s-5) 0 0; padding: 0;
+  display: flex; flex-wrap: wrap; gap: var(--s-3);
+}
+.checks li {
+  display: inline-flex; align-items: center;
+  min-height: 40px; padding: 0 1rem;
+  border-radius: var(--r-pill);
+  border: 1px solid rgba(207, 224, 214, .35);
+  font-size: var(--fs-small);
+  line-height: 1.2;
+}
+.impact__proof { margin-top: var(--stack); }
+
+/* ---------- Tablet and phone ---------- */
+@media (max-width: 899px) {
+  .impact__minor { grid-template-columns: minmax(0, 1fr); gap: var(--stack); }
+  .impact__decor { width: 46vw; top: 2%; right: -12%; opacity: .7; }
+}
+@media (max-width: 560px) {
+  .impact__major { grid-template-columns: minmax(0, 1fr); gap: var(--stack); }
+  .impact__proof .btn { width: 100%; }
+}

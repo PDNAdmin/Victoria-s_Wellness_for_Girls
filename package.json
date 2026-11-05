@@ -1,0 +1,28 @@
+{
+  "name": "victorias-wellness-site",
+  "version": "1.0.0",
+  "description": "",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "media": "node scripts/optimize-media.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "playwright-core": "^1.48.2",
+    "sharp": "^0.33.5",
+    "vite": "^5.4.10"
+  },
+  "dependencies": {
+    "gsap": "^3.12.5",
+    "lenis": "^1.1.14"
+  },
+  "private": true
+}

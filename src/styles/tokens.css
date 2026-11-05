@@ -1,0 +1,109 @@
+/* Design tokens: copied verbatim from docs/Victoria's Wellness Design System.html (Section 7). Do not edit here first. */
+:root {
+  /* Surfaces: warm cream, never pure white as the canvas */
+  --cream-50: #FFFDF8;       /* raised: cards, forms, dialogs */
+  --cream-100: #FAF6EE;      /* canvas: page background */
+  --cream-200: #F1EBDD;      /* band: alternate sections, wells */
+  --sage-100: #E3ECE2;       /* soft green wash: highlights, selected */
+  --rose-200: #F0CFD6;       /* soft rose wash: girls' programme areas */
+  --line: #DDD5C3;           /* hairline borders */
+  --line-strong: #8A8470;    /* control borders, 3:1 on cream */
+
+  /* Text: ink, a green-black */
+  --ink-900: #1B2B24;        /* primary text */
+  --ink-700: #43524B;        /* secondary text */
+  --ink-500: #5B6A63;        /* tertiary text, cream-100 and cream-50 only */
+
+  /* Botanical green: the brand colour */
+  --green-900: #10302A;      /* dark band, footer */
+  --green-800: #17483A;      /* button hover */
+  --green-700: #1F5A45;      /* primary button, links, headings accent */
+  --green-600: #2B7A5C;      /* icons and borders on cream */
+  --on-green: #FAF6EE;       /* text on green */
+  --on-green-muted: #CFE0D6; /* secondary text on dark green */
+
+  /* Muted rose: warmth, girls' programmes */
+  --rose-400: #D98C9F;       /* fill only, never text */
+  --rose-600: #B04A66;       /* text on cream, 4.8:1 */
+  --rose-700: #9C3F58;       /* text on cream, 6.0:1 */
+
+  /* Warm gold: the Donate action only */
+  --gold-400: #D9A93F;       /* Donate button fill */
+  --gold-500: #C9962B;       /* Donate hover */
+  --gold-700: #7A5A10;       /* gold text on cream, 5.9:1 */
+  --on-gold: #1B2B24;        /* text on gold */
+
+  /* Focus */
+  --focus: #1F5BB5;          /* ring on light surfaces */
+  --focus-on-dark: #FFD166;  /* ring on dark green */
+
+  /* Feedback: always paired with an icon or a word */
+  --ok: #2F6B3A;
+  --warn: #7A5A10;
+  --err: #A3322B;
+  --info: #2D5F7A;
+
+  /* Semantic aliases */
+  --bg: var(--cream-100);
+  --surface: var(--cream-50);
+  --text: var(--ink-900);
+  --text-muted: var(--ink-700);
+  --text-subtle: var(--ink-500);
+  --border: var(--line);
+  --primary: var(--green-700);
+  --primary-hover: var(--green-800);
+  --primary-pressed: var(--green-900);
+  --on-primary: var(--on-green);
+  --donate: var(--gold-400);
+  --donate-hover: var(--gold-500);
+  --focus-ring: 3px solid var(--focus);
+
+  /* Elevation: soft, low */
+  --shadow-1: 0 1px 2px rgba(27,43,36,.06), 0 4px 14px rgba(27,43,36,.06);
+  --shadow-2: 0 2px 4px rgba(27,43,36,.06), 0 18px 40px rgba(27,43,36,.12);
+
+  /* Type families */
+  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;           /* 600, soft, warm */
+  --font-body: "Atkinson Hyperlegible", "Segoe UI", Verdana, sans-serif;   /* made for low-vision readers */
+
+  /* Fluid type scale: 390px to 1440px. Body never below 18px, labels never below 14px */
+  --fs-display: clamp(2.5rem, 1.5rem + 4.1vw, 4.75rem);
+  --fs-h1:      clamp(2.125rem, 1.5rem + 2.6vw, 3.5rem);
+  --fs-h2:      clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
+  --fs-h3:      clamp(1.375rem, 1.25rem + 0.6vw, 1.75rem);
+  --fs-body-l:  clamp(1.25rem, 1.18rem + 0.3vw, 1.4375rem);
+  --fs-body:    1.125rem;
+  --fs-small:   1rem;
+  --fs-label:   0.875rem;
+  --lh-display: 1.1;
+  --lh-head: 1.2;
+  --lh-body: 1.6;
+  --tr-display: -0.02em;
+  --tr-label: 0.06em;
+
+  /* Space (4px base) */
+  --s-1: 0.25rem; --s-2: 0.5rem; --s-3: 0.75rem; --s-4: 1rem; --s-5: 1.5rem;
+  --s-6: 2rem; --s-7: 3rem; --s-8: 4.5rem; --s-9: 7rem;
+
+  /* Shape: soft, friendly */
+  --r-1: 8px; --r-2: 16px; --r-3: 28px; --r-pill: 999px;
+
+  /* Layout */
+  --max: 1180px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --measure: 62ch;
+  --tap: 48px;               /* minimum touch target */
+
+  /* Motion: curves */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);       /* hovers, state changes */
+  --ease-gentle: cubic-bezier(0.25, 0.8, 0.25, 1);   /* cards, text rises */
+  --ease-bloom: cubic-bezier(0.19, 1, 0.22, 1);      /* organic image reveals */
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);           /* things leaving */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);  /* soft overshoot for hover and release */
+  /* Motion: spring physics (JS springs read these) */
+  --spring-k: 90;   /* stiffness */
+  --spring-d: 14;   /* damping */
+  --spring-m: 1;    /* mass */
+  /* Motion: durations */
+  --dur-1: 150ms; --dur-2: 300ms; --dur-3: 600ms; --dur-4: 900ms; --dur-5: 1400ms;
+}

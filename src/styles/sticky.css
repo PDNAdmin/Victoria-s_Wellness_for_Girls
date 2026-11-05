@@ -1,0 +1,22 @@
+/* Sticky Get Support: phones and tablets only, after the hero.
+   On wide screens the header already carries it. */
+.sticky-support {
+  position: fixed; z-index: 40;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  min-height: 56px; padding-inline: 1.5rem;
+  box-shadow: var(--shadow-2);
+  transform: translateY(160%);
+  visibility: hidden;
+  transition: transform var(--dur-2) var(--ease-standard), visibility 0s linear var(--dur-2), background-color var(--dur-1) var(--ease-standard);
+}
+.sticky-support.is-visible {
+  transform: none;
+  visibility: visible;
+  transition: transform var(--dur-2) var(--ease-standard), visibility 0s, background-color var(--dur-1) var(--ease-standard);
+}
+/* Never cover the support form itself */
+.sticky-support.is-hidden-near-form,
+.sticky-support.is-hidden-values { transform: translateY(160%); visibility: hidden; }
+
+@media (min-width: 1100px) { .sticky-support { display: none; } }

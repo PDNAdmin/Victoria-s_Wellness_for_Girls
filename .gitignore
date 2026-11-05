@@ -1,0 +1,18 @@
+# Installed packages and build output (recreated by npm install / npm run build)
+node_modules/
+dist/
+video/node_modules/
+video/out/
+
+# Client documents: private (the PRD holds personal contact details)
+docs/
+
+# Raw original photos and videos: large, kept with the client's files.
+# The optimised versions the site uses are in media/.
+assets/
+
+# Editor and system files
+.vscode/
+.DS_Store
+Thumbs.db
+*.log

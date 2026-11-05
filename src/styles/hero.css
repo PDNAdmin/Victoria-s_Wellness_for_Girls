@@ -1,0 +1,214 @@
+/* ============================================================
+   HERO
+   Planes, back to front: backdrop shapes, gold arc, photograph
+   (never moves), botanical sprig. Copy sits to the left.
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: calc(100svh - 76px);
+  display: grid;
+  align-items: center;
+  padding-block: clamp(2.5rem, 7vh, 5.5rem) clamp(3.5rem, 9vh, 7rem);
+  /* Decorations may bleed past the gutter, never past the screen edge
+     (on phones that would widen the layout and zoom the whole page) */
+  overflow-x: clip;
+}
+
+.hero__grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 640px) minmax(0, 440px);
+  justify-content: space-between;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
+}
+
+.hero__grid { position: relative; z-index: 2; }
+
+/* ---------- Copy ---------- */
+.hero__title {
+  font-weight: 700;
+  font-size: clamp(2.125rem, 1rem + 2.9vw, 3.3rem);
+  line-height: 1.1;
+  letter-spacing: -0.028em;
+  max-width: 13em;
+  color: var(--ink-900);
+}
+/* One highlighted word, set on a soft sage marker */
+.hero__title em.hl {
+  font-style: normal;
+  color: var(--green-700);
+  background: var(--sage-100);
+  border-radius: .22em;
+  padding: 0 .14em;
+  -webkit-box-decoration-break: clone;
+          box-decoration-break: clone;
+}
+
+.hero__lead {
+  margin-top: var(--head-gap);
+  max-width: 40ch;
+  font-size: var(--fs-body-l);
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.hero__actions {
+  display: flex; flex-wrap: wrap; gap: var(--s-3);
+  margin-top: var(--s-7);
+}
+
+.hero__privacy {
+  display: flex; align-items: center; gap: .5rem;
+  margin-top: var(--s-5);
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+}
+.hero__privacy svg {
+  width: 20px; height: 20px; flex: none;
+  fill: none; stroke: var(--green-600); stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* ---------- Media ---------- */
+.hero__media {
+  position: relative;
+  margin: 0;
+  width: 100%;
+  isolation: isolate;
+}
+
+/* Arched frame: a doorway, open and safe */
+.hero__frame {
+  position: relative;
+  z-index: 2;
+  aspect-ratio: 4 / 5;
+  border-radius: 50% 50% var(--r-3) var(--r-3) / 40% 40% var(--r-3) var(--r-3);
+  overflow: hidden;
+  background: var(--sage-100) url("../../media/hero-lqip.jpg") center / cover no-repeat;
+  box-shadow: var(--shadow-2);
+}
+.hero__photo, .hero__photo picture, .hero__photo img {
+  width: 100%; height: 100%;
+}
+/* Clip the photo layer itself: Chrome can skip the parent's rounded clip
+   once the bloom mask promotes the photo to its own layer */
+.hero__photo {
+  --arch: 50% 50% var(--r-3) var(--r-3) / 40% 40% var(--r-3) var(--r-3);
+  clip-path: inset(0 round var(--arch));
+}
+.hero__photo img { object-fit: cover; object-position: 50% 40%; }
+
+/* Plane 1: backdrop */
+.hero__backdrop {
+  position: absolute; z-index: 0;
+  inset: 0;
+  pointer-events: none;
+}
+.hero__blob { position: absolute; max-width: none; }
+.hero__blob--sage {
+  width: 112%; right: -18%; bottom: -10%;
+  fill: var(--sage-100);
+}
+.hero__blob--rose {
+  width: 34%; left: -14%; top: 14%;
+  fill: var(--rose-200);
+  opacity: .8;
+}
+
+/* Plane 2: gold arc around the top of the arch (echo of the logo) */
+.hero__arc {
+  position: absolute; z-index: 1;
+  top: 0; left: 0; right: 0;
+  pointer-events: none;
+}
+.hero__arc svg {
+  width: 112%; max-width: none;
+  margin: -6% 0 0 -6%;
+  overflow: visible;
+}
+.hero__arc path {
+  fill: none;
+  stroke: var(--gold-400);
+  stroke-width: .7;
+  stroke-linecap: round;
+}
+
+/* Plane 4: sprig crosses the lower-left edge of the frame, below the faces */
+.hero__sprig {
+  position: absolute; z-index: 3;
+  width: 30%; left: -13%; bottom: 2%;
+  pointer-events: none;
+}
+.hero__sprig svg { width: 100%; overflow: visible; }
+.sprig__stem {
+  fill: none; stroke: var(--green-600); stroke-width: 3.2; stroke-linecap: round;
+}
+.sprig__leaf {
+  fill: var(--cream-50); stroke: var(--green-600); stroke-width: 2.6; stroke-linejoin: round;
+}
+
+.hero__caption {
+  position: relative; z-index: 2;
+  display: flex; align-items: baseline; gap: .6rem;
+  margin-top: var(--s-5);
+  padding-left: 22%;
+  font-size: var(--fs-small);
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+.hero__caption-dot {
+  flex: none; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--rose-600);
+  transform: translateY(-1px);
+}
+
+/* ---------- Tablet and phone: art-directed, not shrunk ---------- */
+@media (max-width: 899px) {
+  .hero { min-height: 0; padding-block: var(--s-7) var(--section-y); }
+  .hero__grid { grid-template-columns: minmax(0, 1fr); gap: var(--block-gap); }
+  .hero__title { max-width: 13em; }
+
+  .hero__media { max-width: 560px; justify-self: center; }
+  .hero__frame {
+    aspect-ratio: 5 / 4;
+    border-radius: 50% 50% var(--r-2) var(--r-2) / 34% 34% var(--r-2) var(--r-2);
+  }
+  .hero__photo { --arch: 50% 50% var(--r-2) var(--r-2) / 34% 34% var(--r-2) var(--r-2); }
+  .hero__photo img { object-position: 50% 30%; }
+  .hero__arc { display: none; }
+  .hero__blob--sage { width: 100%; right: -10%; bottom: -14%; }
+  .hero__blob--rose { width: 28%; left: -8%; top: -6%; }
+  .hero__sprig { width: 22%; left: -5%; bottom: 4%; }
+  .hero__caption { padding-left: 16%; }
+}
+
+@media (max-width: 560px) {
+  .hero { padding-top: var(--s-6); }
+  .hero__title { font-size: 2rem; line-height: 1.12; }
+  .hero__lead { font-size: 1.1875rem; }
+  .hero__actions { display: grid; grid-template-columns: 1fr 1fr; }
+  .hero__actions .btn { padding-inline: 1rem; }
+  .hero__actions .btn-primary { grid-column: 1 / -1; }
+  .hero__caption { padding-left: 18%; }
+}
+
+/* ============================================================
+   Entrance states. Only applied when motion is allowed and
+   scripts are running (see the inline script in index.html).
+   ============================================================ */
+html.motion [data-split]:not(.is-split) { opacity: 0; }
+.w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .12em; margin-bottom: -.12em; }
+.w > span { display: inline-block; will-change: transform; }
+
+html.motion [data-rise] { opacity: 0; transform: translateY(20px); }
+
+html.motion .hero__photo:not(.is-bloomed) {
+  -webkit-mask: var(--bloom-shape) center / var(--bloom, 0%) no-repeat;
+          mask: var(--bloom-shape) center / var(--bloom, 0%) no-repeat;
+}
+
+html.motion .sprig__stem,
+html.motion .hero__arc path { stroke-dasharray: 1; stroke-dashoffset: 1; }
+/* Leaf transforms are owned by GSAP (it measures SVG origins itself) */
+html.motion .sprig__leaf { opacity: 0; }
+html.motion .hero__blob { opacity: 0; }

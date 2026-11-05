@@ -1,0 +1,18 @@
+/* Scroll reveal starting states, shared by every section below the hero.
+   Only applied when motion is allowed and scripts are running (html.motion),
+   so without JS or with reduced motion everything is simply shown. */
+:root {
+  /* The bloom (design system signature): an organic shape that grows to reveal a photo.
+     Used twice only: the hero photo and the Programmes photo. */
+  --bloom-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M100 12c30 0 62 14 76 44s8 70-14 96-58 38-90 30S18 150 14 114 22 44 46 26 70 12 100 12z'/%3E%3C/svg%3E");
+}
+
+html.motion [data-reveal="rise"] { opacity: 0; transform: translateY(20px); }
+html.motion [data-reveal="bloom"]:not(.is-bloomed) {
+  -webkit-mask: var(--bloom-shape) center / var(--bloom, 0%) no-repeat;
+          mask: var(--bloom-shape) center / var(--bloom, 0%) no-repeat;
+}
+html.motion [data-reveal="clip"] { clip-path: inset(100% 0 0 0 round var(--r-3)); }
+html.motion [data-reveal="line"] { transform: scaleX(0); }
+html.motion [data-reveal="draw"] { opacity: 0; }
+html.motion [data-reveal="draw"] :is(path, circle) { stroke-dasharray: 1; stroke-dashoffset: 1; }

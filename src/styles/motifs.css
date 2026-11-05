@@ -1,0 +1,62 @@
+/* ============================================================
+   BOTANICAL MOTIFS
+   Line-drawn flowers, sprigs, leaves and buds from the brand's own
+   symbols. They sit in the open corners of sections (the padding
+   zones), never behind text, draw themselves in once, then sway
+   very gently. Paths inherit stroke and fill from the <svg>.
+   ============================================================ */
+.has-decor { position: relative; overflow-x: clip; }
+.has-decor > .wrap { position: relative; z-index: 1; }
+.decor { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+
+.motif {
+  position: absolute;
+  overflow: visible;
+  stroke: var(--green-600);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: var(--rose-200);          /* petals and leaves */
+  color: var(--gold-400);         /* flower centres and bud tips */
+  transform-origin: 50% 100%;
+  animation: motif-sway 8s ease-in-out infinite alternate;
+}
+.motif--sprig, .motif--leaf { fill: var(--sage-100); }
+.motif--sage { fill: var(--sage-100); color: var(--green-600); }
+.motif--gold { fill: #F6E7C4; color: var(--gold-400); }
+.motif--rose { fill: var(--rose-200); color: var(--rose-400); }
+@keyframes motif-sway { from { rotate: -2.5deg; } to { rotate: 2.5deg; } }
+@media (prefers-reduced-motion: reduce) { .motif { animation: none; } }
+
+/* Draw-in starting state (only when motion is allowed; see reveal.js "motif") */
+html.motion .motif[data-reveal="motif"] { stroke-dasharray: 1; stroke-dashoffset: 1; fill-opacity: 0; }
+
+/* ---------- Placements: open corners only ---------- */
+.d-about-1   { width: clamp(70px, 8vw, 130px);  height: clamp(70px, 8vw, 130px);  right: 1.5%; top: clamp(14px, 2vw, 34px); }
+.d-about-2   { width: clamp(60px, 6vw, 100px);  height: clamp(88px, 9vw, 146px);  left: 2%;  bottom: clamp(10px, 2vw, 30px); rotate: -8deg; }
+.d-prog-1    { width: clamp(44px, 4.5vw, 72px); height: clamp(96px, 10vw, 156px); right: 4%; top: clamp(10px, 2vw, 30px); }
+.d-where-1   { width: clamp(70px, 7vw, 118px);  height: clamp(70px, 7vw, 118px);  left: 3%;  bottom: clamp(12px, 2vw, 34px); }
+.d-where-2   { width: clamp(30px, 3vw, 50px);   height: clamp(54px, 5.4vw, 88px); right: 6%; top: clamp(16px, 3vw, 46px); rotate: 24deg; }
+.d-values-1  { width: clamp(64px, 7vw, 116px);  height: clamp(64px, 7vw, 116px);  right: 3%; top: clamp(14px, 2vw, 30px); }
+.d-values-2  { width: clamp(56px, 5.5vw, 92px); height: clamp(82px, 8vw, 134px);  left: 2.5%; bottom: clamp(10px, 2vw, 26px); rotate: -6deg; }
+.d-inv-1     { width: clamp(56px, 5.5vw, 92px); height: clamp(82px, 8vw, 134px);  right: 3%; top: clamp(10px, 2vw, 30px); rotate: 12deg; }
+.d-inv-2     { width: clamp(52px, 5vw, 84px);   height: clamp(52px, 5vw, 84px);   left: 3%;  bottom: clamp(14px, 2vw, 34px); }
+.d-donate-1  { width: clamp(60px, 6.5vw, 108px); height: clamp(60px, 6.5vw, 108px); right: 3%; bottom: clamp(12px, 2vw, 30px); }
+.d-donate-2  { width: clamp(28px, 2.8vw, 46px); height: clamp(50px, 5vw, 80px);   left: 3%;  top: clamp(16px, 2.5vw, 36px); rotate: -20deg; }
+.d-news-1    { width: clamp(48px, 5vw, 84px);   height: clamp(48px, 5vw, 84px);   right: 3%; top: 50%; translate: 0 -50%; }
+.d-contact-1 { width: clamp(40px, 4vw, 64px);   height: clamp(86px, 9vw, 140px);  left: 3%;  bottom: clamp(10px, 2vw, 30px); }
+.d-contact-2 { width: clamp(28px, 2.8vw, 46px); height: clamp(50px, 5vw, 80px);   right: 5%; top: clamp(16px, 2.5vw, 40px); rotate: 18deg; }
+
+/* Gallery: a small bouquet beside the heading, where the right side is open */
+.d-gal-1 { width: 74px;  height: 160px; right: 14%; top: clamp(40px, 6vw, 96px); }
+.d-gal-2 { width: 120px; height: 120px; right: 5%;  top: clamp(70px, 8vw, 130px); }
+.d-gal-3 { width: 46px;  height: 80px;  right: 22%; top: clamp(110px, 11vw, 180px); rotate: -28deg; }
+@media (max-width: 899px) {
+  .d-gal-1, .d-gal-3 { display: none; }
+  .d-gal-2 { width: 64px; height: 64px; top: 18px; right: 4%; }
+  /* Phones: keep only one quiet motif per section */
+  .d-about-2, .d-where-2, .d-values-2, .d-inv-2, .d-donate-2, .d-contact-2 { display: none; }
+}
+@media (max-width: 599px) {
+  .d-news-1 { top: 16px; translate: none; width: 44px; height: 44px; }
+}

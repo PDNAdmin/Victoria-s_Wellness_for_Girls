@@ -1,0 +1,103 @@
+/* ---------- Header ---------- */
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(250, 246, 238, .92);
+  -webkit-backdrop-filter: saturate(1.2) blur(10px);
+  backdrop-filter: saturate(1.2) blur(10px);
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--dur-2) var(--ease-standard), box-shadow var(--dur-2) var(--ease-standard);
+}
+/* Hairline only once the page has moved, so the hero opens as one calm field */
+.site-header.is-scrolled { border-bottom-color: var(--line); }
+
+.site-header__inner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--s-4);
+  min-height: 76px;
+}
+
+.brand {
+  display: flex; align-items: center; gap: .7rem;
+  text-decoration: none; color: var(--ink-900);
+  min-height: var(--tap);
+  flex: none;
+}
+.brand__mark { width: 50px; height: auto; }
+.brand__text { display: grid; line-height: 1.1; }
+.brand__name { font-family: var(--font-display); font-weight: 600; font-size: 1.25rem; letter-spacing: -0.01em; }
+.brand__sub { font-size: var(--fs-label); color: var(--text-muted); margin-top: 3px; }
+
+/* Full navigation (wide screens) */
+.site-nav { display: flex; align-items: center; gap: var(--s-5); }
+.site-nav__list { display: flex; gap: 2px; list-style: none; margin: 0; padding: 0; }
+.site-nav__list a {
+  display: inline-flex; align-items: center;
+  min-height: var(--tap); padding: 0 .85rem;
+  border-radius: var(--r-pill);
+  color: var(--text-muted); text-decoration: none;
+  font-size: var(--fs-small);
+  white-space: nowrap;
+  transition: background-color var(--dur-1) var(--ease-standard), color var(--dur-1) var(--ease-standard);
+}
+.site-nav__list a:hover { background: var(--sage-100); color: var(--ink-900); }
+.site-nav__actions { display: flex; gap: var(--s-2); }
+
+.site-header__compact { display: none; align-items: center; gap: var(--s-2); }
+
+
+.menu-btn {
+  appearance: none; display: inline-flex; align-items: center; gap: .55rem;
+  min-height: var(--tap); padding: 0 .9rem;
+  border: 1px solid var(--line-strong); border-radius: var(--r-pill);
+  background: transparent; color: var(--ink-900);
+  font: 700 var(--fs-small) var(--font-body);
+  cursor: pointer;
+}
+.menu-btn:hover { background: var(--sage-100); }
+.menu-btn__icon { position: relative; width: 18px; height: 12px; }
+.menu-btn__icon i {
+  position: absolute; left: 0; right: 0; height: 2px; border-radius: 2px; background: currentColor;
+  transition: transform var(--dur-2) var(--ease-gentle), top var(--dur-2) var(--ease-gentle);
+}
+.menu-btn__icon i:first-child { top: 1px; }
+.menu-btn__icon i:last-child { top: 9px; }
+.menu-btn[aria-expanded="true"] .menu-btn__icon i:first-child { top: 5px; transform: rotate(45deg); }
+.menu-btn[aria-expanded="true"] .menu-btn__icon i:last-child { top: 5px; transform: rotate(-45deg); }
+
+@media (max-width: 1099px) {
+  .site-header__compact { display: flex; }
+
+  /* The nav becomes a panel under the header */
+  .site-nav {
+    position: absolute; left: 0; right: 0; top: 100%;
+    flex-direction: column; align-items: stretch; gap: var(--s-5);
+    padding: var(--s-4) var(--gutter) var(--s-6);
+    background: var(--cream-50);
+    border-bottom: 1px solid var(--line);
+    box-shadow: var(--shadow-2);
+    visibility: hidden; opacity: 0; transform: translateY(-8px);
+    transition: opacity var(--dur-2) var(--ease-standard), transform var(--dur-2) var(--ease-gentle), visibility 0s linear var(--dur-2);
+  }
+  .site-nav.is-open {
+    visibility: visible; opacity: 1; transform: none;
+    transition: opacity var(--dur-2) var(--ease-standard), transform var(--dur-2) var(--ease-gentle), visibility 0s;
+  }
+  .site-nav__list { flex-direction: column; gap: 0; }
+  .site-nav__list a {
+    width: 100%; min-height: 56px; padding: 0 var(--s-2);
+    border-radius: 0; border-bottom: 1px solid var(--line);
+    font-family: var(--font-display); font-weight: 600; font-size: 1.375rem; color: var(--ink-900);
+  }
+  .site-nav__list a:hover { background: transparent; color: var(--green-700); }
+  .site-nav__actions { gap: var(--s-3); }
+  .site-nav__actions .btn { flex: 1; min-height: var(--tap); }
+}
+
+@media (max-width: 560px) {
+  .site-header__inner { min-height: 68px; gap: var(--s-2); }
+  .brand__mark { width: 42px; }
+  .brand__name { font-size: 1.0625rem; }
+  .brand__sub { display: none; }
+  /* Get Support lives in the sticky button and the hero on small phones */
+  .site-header__compact > .btn { display: none; }
+}

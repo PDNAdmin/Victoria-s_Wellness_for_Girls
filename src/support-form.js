@@ -27,6 +27,9 @@ export function initSupportForm() {
   const guardian = form.querySelector("[data-guardian]");
   const submit = form.querySelector('button[type="submit"]');
   const whatsapp = config.whatsapp;
+  const submitLabel = submit.textContent;
+  // The first age group (marked data-minor) is the under-18 one, whatever its wording
+  const minorValue = form.querySelector('input[name="age"][data-minor]')?.value;
   let lastSent = 0;
 
   /* ---------- Show or clear one field's error ---------- */
@@ -58,7 +61,7 @@ export function initSupportForm() {
     contact: () => (validContact(value("contact")) ? "" : MSG.contact),
     help: () => (value("help") ? "" : MSG.help),
     age: () => (value("age") ? "" : MSG.age),
-    guardian: () => (value("age") !== "Under 18" || validContact(value("guardian")) ? "" : MSG.guardian),
+    guardian: () => (value("age") !== minorValue || validContact(value("guardian")) ? "" : MSG.guardian),
     consent: () => (value("consent") ? "" : MSG.consent),
   };
 
@@ -75,7 +78,7 @@ export function initSupportForm() {
 
   /* ---------- Guardian question only for under 18s ---------- */
   const toggleGuardian = () => {
-    const under18 = value("age") === "Under 18";
+    const under18 = !!minorValue && value("age") === minorValue;
     guardian.hidden = !under18;
     if (!under18) { form.elements.guardian.value = ""; setError("guardian", ""); }
   };
@@ -85,8 +88,8 @@ export function initSupportForm() {
     link.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation(); // the general in-page link handler would also scroll
-      const referral = form.querySelector('input[name="help"][value="A referral"]');
-      referral.checked = true;
+      const referral = form.querySelector('input[name="help"][data-referral-option]');
+      if (referral) referral.checked = true;
       setError("help", "");
       const lenis = getLenis();
       const y = form.getBoundingClientRect().top + window.scrollY - 100;
@@ -126,7 +129,7 @@ export function initSupportForm() {
 
     if (!config.supportEndpoint) {
       // Not connected to a sending service yet: be honest and offer WhatsApp
-      console.warn("Support form: no endpoint set in src/config.js, so nothing was sent.");
+      console.warn("Support form: no endpoint set (Site settings → Forms in the Studio), so nothing was sent.");
       showProblem();
       return;
     }
@@ -161,7 +164,7 @@ export function initSupportForm() {
       showProblem();
     } finally {
       submit.disabled = false;
-      submit.textContent = "Send my request";
+      submit.textContent = submitLabel;
     }
   });
 }

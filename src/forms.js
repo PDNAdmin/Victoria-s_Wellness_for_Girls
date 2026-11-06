@@ -103,7 +103,7 @@ function setupForm(form) {
 
     const endpoint = config[`${name}Endpoint`];
     if (!endpoint) {
-      console.warn(`Form "${name}": no endpoint set in src/config.js, so nothing was sent.`);
+      console.warn(`Form "${name}": no endpoint set (Site settings → Forms in the Studio), so nothing was sent.`);
       showProblem();
       return;
     }

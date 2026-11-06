@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/studio", "destination": "https://victorias-wellness.sanity.studio/", "permanent": false },
+    { "source": "/studio/:path*", "destination": "https://victorias-wellness.sanity.studio/:path*", "permanent": false }
+  ]
+}

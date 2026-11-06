@@ -380,6 +380,12 @@
 }
 .site-footer__links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-5); }
 .site-footer__links a { display: inline-flex; align-items: center; min-height: var(--tap); }
+.site-footer__credit {
+  margin-top: var(--s-5); padding-top: var(--s-4); border-top: 1px solid rgba(207, 224, 214, .18);
+  font-size: var(--fs-label); color: var(--on-green-muted);
+}
+.site-footer__credit a { color: var(--on-green); text-decoration: underline; text-underline-offset: .2em; }
+.site-footer__credit a:hover { color: var(--gold-400); }
 
 /* ---------- Tablet and phone ---------- */
 @media (max-width: 999px) {

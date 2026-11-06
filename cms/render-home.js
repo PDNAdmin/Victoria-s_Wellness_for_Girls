@@ -843,6 +843,7 @@ ${faqItems.map((q, i) => `          <details class="faq__item" data-reveal="rise
         </nav>
         <p class="site-footer__copy">${esc(ft.copyright)}${when(ft.registration, () => `<br>${esc(ft.registration)}`)}</p>
       </div>
+      <p class="site-footer__credit">Designed and Developed by <a href="https://precioustola.com" target="_blank" rel="noopener">PDN</a></p>
     </div>
   </footer>`;
 

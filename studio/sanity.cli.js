@@ -7,4 +7,5 @@ export default defineCliConfig({
   },
   // `npm run deploy` publishes the Studio at https://<studioHost>.sanity.studio
   studioHost: "victorias-wellness",
+  deployment: { appId: "w2sv052q3059db3zfgookhhx" },
 });

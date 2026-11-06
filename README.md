@@ -10,6 +10,9 @@ npm run dev       # local preview at http://localhost:5173
 npm run build     # production files in dist/
 ```
 
+For the live site, build with the real web address so search engines get the canonical link,
+sitemap and preview image: `SITE_URL=https://your-domain.org npm run build`. See [SEO.md](SEO.md).
+
 ## Project layout
 
 - `index.html`, `privacy.html`, `terms.html`: the pages

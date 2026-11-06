@@ -6,14 +6,27 @@
   <meta name="color-scheme" content="light">
   <meta name="theme-color" content="#FAF6EE">
 
-  <title>Victoria's Wellness: health education for women and girls</title>
-  <meta name="description" content="Health education, girls' menstrual health and support from Victoria's Wellness Initiative in Nigeria. Get support, volunteer or donate.">
+  <!-- SEO. Keyword research and reasoning: SEO.md.
+       %SITE_URL% is filled in at build time from the SITE_URL setting (see vite.config.js). -->
+  <title>Victoria's Wellness | Women's and Girls' Health NGO, Nigeria</title>
+  <meta name="description" content="Nigerian non-profit for women's and girls' health: menstrual health, outreaches, screening and support in Lagos, Ogun and Osun. Get help, volunteer or donate.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="%SITE_URL%/">
 
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Victoria's Wellness Initiative for Women and Girls">
+  <meta property="og:locale" content="en_NG">
+  <meta property="og:url" content="%SITE_URL%/">
   <meta property="og:title" content="Victoria's Wellness Initiative for Women and Girls">
-  <meta property="og:description" content="Advancing the health, dignity and wellbeing of women and girls, everywhere.">
-  <meta property="og:image" content="media/hero-wide-1200.jpg">
+  <meta property="og:description" content="A Nigerian non-profit advancing the health, dignity and wellbeing of women and girls: menstrual health, health outreaches, screening and support.">
+  <meta property="og:image" content="%SITE_URL%/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="A Victoria's Wellness volunteer holds a microphone to a smiling schoolgirl during a girls' health outreach.">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Victoria's Wellness Initiative for Women and Girls">
+  <meta name="twitter:description" content="Health education, menstrual health and community outreaches for women and girls in Nigeria.">
+  <meta name="twitter:image" content="%SITE_URL%/og-image.jpg">
 
   <link rel="icon" type="image/png" sizes="48x48" href="media/icon-48.png">
   <link rel="apple-touch-icon" href="media/icon-180.png">
@@ -34,18 +47,8 @@
     })();
   </script>
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "NGO",
-    "name": "Victoria's Wellness Initiative for Women and Girls",
-    "slogan": "Healthier Women. Brighter Futures.",
-    "description": "A community-driven nonprofit advancing the health, dignity and wellbeing of women and girls through health education, preventive care and community support.",
-    "logo": "/brand/logo-full.png",
-    "areaServed": [{ "@type": "Country", "name": "Nigeria" }],
-    "sameAs": ["https://www.instagram.com/vwigcare"]
-  }
-  </script>
+  <!-- Structured data for search engines. Built in vite.config.js so it can use the live web address. -->
+  <!-- seo:schema -->
 
   <link rel="stylesheet" href="src/styles/index.css">
 </head>

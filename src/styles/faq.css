@@ -1,0 +1,66 @@
+/* ============================================================
+   FAQ
+   Plain questions with short answers. Written for people first,
+   and marked up as FAQ data so search and AI answers can quote it.
+   Left: heading (stays in view on wide screens). Right: the list.
+   ============================================================ */
+.faq { padding-block: var(--section-y); }
+.faq__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+  align-items: start;
+  gap: var(--stack) clamp(2rem, 6vw, 6rem);
+}
+.faq__head { position: sticky; top: calc(76px + var(--s-7)); }
+.faq__title { font-size: var(--fs-h1); line-height: 1.1; }
+.faq__intro { margin-top: var(--head-gap); color: var(--text-muted); font-size: var(--fs-body-l); line-height: 1.5; }
+
+.faq__list { display: grid; gap: var(--s-3); }
+.faq__item {
+  border: 1px solid var(--border);
+  border-radius: var(--r-2);
+  background: var(--surface);
+  transition: border-color .2s var(--ease-standard), box-shadow .2s var(--ease-standard);
+}
+.faq__item[open] { border-color: var(--green-600); box-shadow: var(--shadow-1); }
+.faq__item summary {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--s-4);
+  padding: var(--s-5);
+  cursor: pointer;
+  list-style: none;
+  border-radius: inherit;
+}
+.faq__item summary::-webkit-details-marker { display: none; }
+.faq__item summary:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
+.faq__q { font-size: var(--fs-body-l); line-height: 1.35; font-family: var(--font-body); font-weight: 700; }
+.faq__icon {
+  flex: none; position: relative; width: 32px; height: 32px; border-radius: 50%;
+  background: var(--sage-100);
+}
+.faq__icon::before, .faq__icon::after {
+  content: ""; position: absolute; left: 50%; top: 50%;
+  width: 12px; height: 2px; border-radius: 2px; background: var(--green-700);
+  translate: -50% -50%;
+  transition: rotate .25s var(--ease-gentle);
+}
+.faq__icon::after { rotate: 90deg; }
+.faq__item[open] .faq__icon::after { rotate: 0deg; }
+.faq__a { padding: 0 var(--s-5) var(--s-5); color: var(--text-muted); max-width: var(--measure); }
+.faq__a p + p { margin-top: var(--s-3); }
+
+.d-faq-1 { width: clamp(56px, 5.5vw, 92px); height: clamp(82px, 8vw, 134px); left: 2%; bottom: clamp(10px, 2vw, 30px); rotate: -10deg; }
+
+@media (max-width: 999px) {
+  .faq__grid { grid-template-columns: minmax(0, 1fr); }
+  .faq__head { position: static; }
+}
+
+/* ---------- Upcoming outreaches (Outreach card) ---------- */
+.events { list-style: none; margin: var(--s-4) 0 0; padding: 0; display: grid; gap: var(--s-4); }
+.event { display: grid; gap: var(--s-1); padding-left: var(--s-4); border-left: 3px solid var(--green-600); }
+.event__date { font-size: var(--fs-label); font-weight: 700; letter-spacing: var(--tr-label); text-transform: uppercase; color: var(--green-700); }
+.event__name { font-size: var(--fs-body); }
+.event__place, .event__text { font-size: var(--fs-small); color: var(--text-muted); }
+
+/* ---------- Impact: "Figures as of" ---------- */
+.impact__asof { margin-top: var(--s-3); font-size: var(--fs-small); color: var(--on-green-muted); }

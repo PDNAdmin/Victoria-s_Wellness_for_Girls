@@ -80,6 +80,11 @@ if (sticky && heroActions && "IntersectionObserver" in window) {
   }
 }
 
+/* ---------- FAQ: opening an answer changes the page height, so re-measure scroll effects ---------- */
+document.addEventListener("toggle", (e) => {
+  if (e.target.matches?.(".faq__item")) ScrollTrigger.refresh();
+}, true);
+
 /* ---------- Forms and media first: they must work even if an animation fails ---------- */
 initSupportForm();
 initForms();

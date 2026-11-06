@@ -3,6 +3,13 @@ node_modules/
 dist/
 video/node_modules/
 video/out/
+studio/node_modules/
+studio/dist/
+studio/.sanity/
+
+# Private settings and tokens (see .env.example)
+.env
+studio/.env
 
 # Client documents: private (the PRD holds personal contact details)
 docs/

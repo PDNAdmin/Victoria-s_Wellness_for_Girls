@@ -4,10 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="light">
-  <title>Terms of use | Victoria's Wellness</title>
-  <meta name="description" content="Terms of use and health information disclaimer.">
-  <!-- Placeholder page: kept out of search results until the final text is in -->
-  <meta name="robots" content="noindex, follow">
+  <!-- cms:legal-head -->
   <link rel="icon" type="image/png" sizes="48x48" href="media/icon-48.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,29 +14,15 @@
     .legal { padding-block: var(--s-8) var(--s-9); }
     .legal h1 { font-size: var(--fs-h1); }
     .legal p { margin-top: var(--s-5); max-width: var(--measure); }
-    .legal .pending-note { color: var(--text-muted); font-size: var(--fs-small); }
+    .legal .pending-note, .legal__updated { color: var(--text-muted); font-size: var(--fs-small); }
+    .legal h2 { margin-top: var(--s-7); font-size: var(--fs-h2); }
+    .legal h3 { margin-top: var(--s-6); font-size: var(--fs-h3); }
+    .legal ul, .legal ol { margin-top: var(--s-4); max-width: var(--measure); padding-left: 1.25em; }
+    .legal li + li { margin-top: var(--s-2); }
   </style>
 </head>
 <body>
-  <header class="site-header is-scrolled">
-    <div class="wrap site-header__inner">
-      <a class="brand" href="index.html" aria-label="Victoria's Wellness Initiative for Women and Girls, home">
-        <img class="brand__mark" src="media/logo-emblem.png" width="223" height="192" alt="">
-        <span class="brand__text">
-          <span class="brand__name">Victoria's Wellness</span>
-          <span class="brand__sub">Initiative for Women and Girls</span>
-        </span>
-      </a>
-      <a class="btn btn-primary btn-sm" href="index.html#get-support">Get Support</a>
-    </div>
-  </header>
-  <main class="legal wrap">
-    <h1>Terms of use</h1>
-    <p>Please read these terms before using this site. The health information here is for education only and does not replace advice from a health professional.</p>
-    <!-- TODO: full terms text. The client supplied a full draft in PRD 11.5; it needs a final
-         review and an effective date before it is published here. -->
-    <p class="pending-note">Our full terms of use are being finalised and will be published here before launch.</p>
-    <p><a href="index.html">Back to home</a></p>
-  </main>
+  <!-- Built from the content (cms/seo.js renderLegal). Edit it in the Studio. -->
+  <!-- cms:legal-body -->
 </body>
 </html>

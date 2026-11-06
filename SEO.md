@@ -1,4 +1,4 @@
-# SEO: keyword research and setup
+# SEO and AEO: keyword research and setup
 
 Researched 5 November 2026, looking at the last 6–12 months.
 
@@ -24,17 +24,43 @@ Researched 5 November 2026, looking at the last 6–12 months.
 
 ## What is set up on the site
 
+All of this is built from the content in Sanity (code: `cms/seo.js`), so editors change it in the Studio under **Site settings → Search and sharing** and **AI answers**. See [CMS.md](CMS.md).
+
 - **Title:** "Victoria's Wellness | Women's and Girls' Health NGO, Nigeria".
 - **Description:** includes menstrual health, outreaches, screening, Lagos/Ogun/Osun, and get help/volunteer/donate.
-- **Social previews:** Open Graph and Twitter/X cards, with a 1200×630 preview image (`public/og-image.jpg`).
-- **Structured data (schema.org NGO):**
-  - Names, including VWIG and vwigcare.
-  - Areas served: Lagos, Ogun and Osun states, Nigeria.
-  - Topics: menstrual health, period poverty, cervical screening, HPV awareness, malaria, mental wellbeing and more.
-  - Contact details and Instagram.
-- **Generated at build time:** a canonical address, `robots.txt` and `sitemap.xml`.
-- **Privacy and Terms pages:** marked *noindex* until their final text is written. Remove that line when they are ready.
-- **Already in place:** the page already uses the right words in headings and photo descriptions (menstrual health kits, cervical screening, malaria, Lagos/Ogun/Osun). Visible wording was **not** changed, because the client approves copy.
+- **Social previews:** Open Graph and Twitter/X cards, with a 1200×630 preview image (`public/og-image.jpg`, or the one chosen in the Studio).
+- **Structured data (schema.org):**
+  - **NGO:** names (including VWIG and vwigcare), summary, areas served (Lagos, Ogun and Osun states, Nigeria), topics, contact details and Instagram.
+  - **Services:** each programme, with who it is for.
+  - **WebSite** and **WebPage**, with the date the content last changed.
+  - **FAQPage:** the questions and answers from the FAQ section.
+  - **Event:** each upcoming outreach entered in the Studio, with date and place.
+- **Generated at build time:** a canonical address, `robots.txt`, `sitemap.xml` (with real last-changed dates) and `llms.txt`.
+- **Privacy and Terms pages:** marked *noindex* while **Hide from search engines** is on in the Studio. They join the sitemap when it is turned off.
+- **Already in place:** the page uses the right words in headings and photo descriptions (menstrual health kits, cervical screening, malaria, Lagos/Ogun/Osun).
+
+## AEO: being the answer in AI search
+
+Answer engine optimisation (AEO) is about being quoted when people ask ChatGPT, Perplexity, Google AI Overviews, Copilot or Siri a question, not only about ranking in a list of links. These tools favour pages that state facts plainly, answer questions directly, are easy to fetch, and agree with what other sites say.
+
+What is set up:
+
+- **FAQ section** (new, `#faq`): eight questions written the way people ask them, each answered in the first sentence. Marked up as FAQPage data. **The draft answers only use facts already on the site, but the client should check them** (Studio → Home page → FAQ).
+- **`llms.txt`** at the site root: a plain-text summary of the organisation, programmes, places, figures, health checks, how to get help, FAQs and contacts, for AI assistants (format: [llmstxt.org](https://llmstxt.org)). It is linked from the page head.
+- **AI crawlers named in `robots.txt`:** AI search and answer tools (OAI-SearchBot, ChatGPT-User, PerplexityBot, Claude-SearchBot, Claude-User, Applebot, DuckAssistBot) are always allowed, so the site can be cited. Training-only crawlers (GPTBot, ClaudeBot, Google-Extended, Applebot-Extended, CCBot and others) are allowed by default; one switch in the Studio blocks them.
+- **A quotable summary** (Studio → Site settings → AI answers) used in structured data and `llms.txt`.
+- **Dated figures:** an optional "Figures as of" date in the Impact section, shown on the page and in `llms.txt`. AI tools trust dated numbers more. **Fill it in** once the client confirms the figures.
+- **Everything is in the HTML:** the content is written into the page at build time, so tools that don't run JavaScript still read all of it.
+- **Speakable markup** pointing voice assistants at the hero and the FAQ.
+
+What helps most from here (needs the client):
+
+1. **Fill in the "as of" date** and the **year founded** (Studio → Site settings → AI answers).
+2. **Keep the FAQ growing.** Add questions people ask on WhatsApp and at outreaches, e.g. "How can my school get sanitary pads?", "Is the outreach free?", "Where is the next outreach?". Only state what is true.
+3. **Add each outreach** under Outreach and events before it happens. It shows on the site and goes out as event data.
+4. **Be consistent everywhere.** Use the same name, description, phone and email on Instagram, LinkedIn, Google Business Profile and NGO directories. AI tools cross-check sources.
+5. **Get mentioned.** News stories, partner websites and directory listings (GlobalGiving, Idealist, Nigerian NGO directories) are what AI tools cite alongside the site.
+6. **Check what AI tools say.** Every month or two, ask ChatGPT, Perplexity and Google "What is Victoria's Wellness Initiative for Women and Girls?" and "NGOs for girls' menstrual health in Lagos", and note whether the site is cited.
 
 ### Setting the web address (required before launch)
 
@@ -43,11 +69,11 @@ SITE_URL=https://your-domain.org npm run build          # Git Bash / macOS / Lin
 $env:SITE_URL="https://your-domain.org"; npm run build  # PowerShell
 ```
 
-Without it, the build still works but leaves out the canonical link, sitemap and full preview-image address, and prints a warning.
+Put it in `.env` (`SITE_URL=https://your-domain.org`) or set it on the host. Without it, the build still works but leaves out the canonical link, sitemap and full preview-image address, and prints a warning.
 
 ## Next steps (need the client or the live domain)
 
-1. **Google Search Console:** verify the domain and submit `sitemap.xml`.
+1. **Google Search Console and Bing Webmaster Tools:** verify the domain and submit `sitemap.xml`. Bing matters for AEO: ChatGPT search and Copilot use its index.
 2. **Google Business Profile** for the organisation. This is the biggest win for "NGO near me" and "NGO in Lagos" searches.
 3. **Get listed** on GlobalGiving, Idealist and Jobberman volunteer listings, and on Nigerian NGO directories. These rank for the action phrases and link back to the site.
 4. **News or stories page:** one short post per outreach, named by place and topic. For example: "Menstrual health outreach for schoolgirls in Epe, Lagos".
@@ -57,9 +83,7 @@ Without it, the build still works but leaves out the canonical link, sitemap and
    - 28 May: Menstrual Hygiene Day (#PeriodFriendlyWorld, #MHDay)
    - 10 October: World Mental Health Day
    - 11 October: International Day of the Girl
-6. **Optional copy suggestions for the client to approve:**
-   - Programmes intro: "…including menstrual health, cervical screening and malaria prevention."
-   - A short FAQ: "Is the outreach free?", "Who can get support?", "How do I volunteer?". An FAQ also qualifies for FAQ structured data.
+6. **Optional copy suggestion for the client to approve:** Programmes intro: "…including menstrual health, cervical screening and malaria prevention." (The FAQ suggested here before is now on the site.)
 
 ## Check these in Google Trends (Nigeria, past 12 months)
 

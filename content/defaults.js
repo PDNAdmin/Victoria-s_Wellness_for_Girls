@@ -108,8 +108,8 @@ export const home = {
 
   about: {
     eyebrow: "Who we are",
-    title: "A health initiative led by the communities it serves",
-    body: "Victoria's Wellness Initiative for Women and Girls is a community-driven nonprofit. We began because too many women and girls could not reach good health information or care. We work to change that through education, prevention and local action, so every woman and girl can live a healthy life with dignity.",
+    title: "A community-oriented health initiative that places local needs, collective participation, and sustainable health outcomes at its core",
+    body: "Victoria's Wellness Initiative for Women and Girls is a community-driven nonprofit. We began because too many women and girls could not access good health information or care. We work to change that through education, prevention and local action, so every woman and girl can live a healthy life with dignity.",
     linkLabel: "See our programmes",
     linkHref: "#programmes",
     image: img("about", 880, 704,
@@ -121,7 +121,7 @@ export const home = {
       more: "We do this by building health knowledge, widening access to quality care and prevention, and giving underserved communities the resources and opportunities to thrive.",
       image: img("gallery-bp-check", 960, 640,
         "A volunteer in gloves takes a woman's blood pressure while other women wait their turn in a community hall."),
-      caption: "Blood pressure checks at a women's health outreach.",
+      caption: "Non-Communicable Disease (NCD) risk screening at a women's health outreach.",
     },
     vision: {
       label: "Our vision",
@@ -166,7 +166,7 @@ export const home = {
       },
       {
         name: "Malaria Prevention", icon: "net", status: "now",
-        text: "Community education, awareness drives and insecticide-treated mosquito nets.",
+        text: "Community health promotion and education, public health awareness campaigns, and malaria prevention interventions, including the distribution of insecticide-treated mosquito nets (ITNs).",
         audience: "Women, children, families", actions: [arrow],
       },
       {
@@ -239,7 +239,7 @@ export const home = {
     eyebrow: "Our values",
     title: "What guides our work",
     intro: "Ten promises we keep in every outreach, every session and every conversation.",
-    image: img("gallery-line", 960, 640, "A line of schoolgirls in berets show their packs of sanitary pads to the camera."),
+    image: null, // its photo is in the Gallery, so no picture repeats on the page
     items: [
       { name: "Empowerment", icon: "girl", color: "sage", text: "We give women and girls the knowledge, confidence and resources to make informed choices about health and life." },
       { name: "Health Equity", icon: "scales", color: "rose", text: "Good healthcare and health information are rights, not privileges." },
@@ -297,7 +297,7 @@ export const home = {
     body: "Every woman and girl deserves a healthy, dignified life. We welcome volunteers, health professionals, teachers and community advocates to help close healthcare gaps. We also welcome schools, NGOs, companies, donors and sponsors who share our vision.",
     image: img("involved", 880, 587,
       "Partners, officials and Victoria's Wellness volunteers stand behind bags of donated sanitary products outside a school office.", "section"),
-    caption: "Partners and volunteers with donated sanitary products at Epe Girls' Senior High School.",
+    caption: "Presentation and distribution of menstrual hygiene supplies at Epe Girls' Senior High School.",
     waysLabel: "Four ways to help",
     ways: [
       { label: "Volunteer your time and skills", icon: "heart" },
@@ -334,8 +334,7 @@ export const home = {
     whatsappMessage: "Hello, I would like to donate to Victoria's Wellness.",
     emailLabel: "Email us to give",
     emailSubject: "Supporting Victoria's Wellness",
-    image: img("gallery-epe-handout", 960, 640,
-      "A volunteer hands a pack of sanitary pads to a schoolgirl while her classmates wait their turn."),
+    image: null, // its photo is in the Gallery, so no picture repeats on the page
     useTitle: "How your gift is used",
     uses: ["Community health outreaches", "Health education campaigns", "Menstrual health work", "Preventive care", "Essential health supplies for women and girls"],
     note: "Gifts go to our charitable work and related programme costs, with careful and open use of every contribution.",
@@ -356,6 +355,13 @@ export const home = {
     events: [],
     instagramLabel: "Follow us on Instagram (@vwigcare)",
     askLabel: "Ask about an outreach",
+    clipsTitle: "Voices from our outreaches",
+    clipsIntro: "Short clips from the Benevolence Tour. Turn your sound on.",
+    clips: [
+      { video: { local: "media/clip-student-speech.mp4" }, poster: { local: "media/clip-student-speech-poster.jpg" }, caption: "A student gives her speech.", label: "Video: a student in a blue hijab gives a speech at the Benevolence Tour." },
+      { video: { local: "media/clip-guest-speaker.mp4" }, poster: { local: "media/clip-guest-speaker-poster.jpg" }, caption: "A guest speaker addresses the students.", label: "Video: a guest speaker talks to the students at the Benevolence Tour." },
+      { video: { local: "media/clip-students-helping.mp4" }, poster: { local: "media/clip-students-helping-poster.jpg" }, caption: "Students lend a hand on the day.", label: "Video: schoolgirls carry a bucket together at a school outreach." },
+    ],
   },
 
   gallery: {
@@ -364,16 +370,19 @@ export const home = {
     intro: "Real people, real communities. Tap any photo to see it larger.",
     items: [
       { layout: "big", caption: "Students hold up their sanitary pads after a girls' health session, Epe.", image: img("gallery-epe-pads", 960, 640, "Schoolgirls in pink berets hold their packs of sanitary pads up high.") },
-      { layout: "normal", caption: "Blood pressure checks at a women's health outreach.", image: img("gallery-bp-check", 960, 640, "A volunteer in gloves takes a woman's blood pressure in a community hall.") },
       { layout: "normal", caption: "A volunteer hears from students during a girls' health session, Epe.", image: img("gallery-mic", 960, 640, "A volunteer holds a microphone out to a laughing schoolgirl while her classmates look on.") },
-      { layout: "wide", caption: "Women from the community after a health outreach.", image: img("gallery-women-group", 960, 640, "A large group of women from the community stand and sit together outside a single-storey building.") },
-      { layout: "wide", caption: "Students gather for a girls' health outreach, Epe Girls' Senior High School.", image: img("gallery-epe-school", 960, 640, "Hundreds of students in pink berets and uniforms gather in front of Epe Girls' Senior High School.") },
-      { layout: "normal", caption: "Volunteers hand out sanitary products, Epe.", image: img("gallery-epe-handout", 960, 640, "A volunteer hands a pack of sanitary pads to a schoolgirl while her classmates wait their turn.") },
-      { layout: "normal", caption: "Students show their sanitary pads, Epe.", image: img("gallery-line", 960, 640, "A line of schoolgirls in berets show their packs of sanitary pads to the camera.") },
-      { layout: "normal", caption: "Contest winners receive certificates for a fully funded annual scholarship.", image: img("gallery-certificates", 960, 640, "Schoolgirls in blue uniforms hold certificates, standing with volunteers under trees.") },
+      { layout: "normal", caption: "A student speaks at the Benevolence Tour.", image: img("gallery-n-speaker", 960, 640, "A girl in a blue hijab speaks into a microphone in front of the guests' table.") },
+      { layout: "wide", caption: "Students show their sanitary pads, Epe.", image: img("gallery-line", 960, 640, "A line of schoolgirls in berets show their packs of sanitary pads to the camera.") },
       { layout: "wide", caption: "Girls receive awards at a Victoria's Wellness event.", image: img("gallery-ceremony", 960, 640, "Girls in school uniforms hold award certificates on a stage beneath a Victoria's Wellness banner.") },
-      { layout: "normal", caption: "Students wait for their sanitary products, Epe.", image: img("gallery-queue", 960, 640, "Schoolgirls queue in a courtyard while a volunteer prepares their sanitary products.") },
-      { layout: "wide", caption: "A health education session led by our volunteers.", image: img("gallery-session", 960, 640, "Women seated in rows listen as volunteers lead a health education session at the front of a hall.") },
+      { layout: "normal", caption: "Heads down: students write their entries.", image: img("gallery-n-closeup", 960, 640, "Close-up of schoolgirls in checked blue uniforms writing at a table.") },
+      { layout: "normal", caption: "Volunteers hand out sanitary products, Epe.", image: img("gallery-epe-handout", 960, 640, "A volunteer hands a pack of sanitary pads to a schoolgirl while her classmates wait their turn.") },
+      { layout: "normal", caption: "Students at work during the Benevolence Tour.", image: img("gallery-n-writing", 960, 640, "Four schoolgirls in blue uniforms write at a table with a microphone in front of them.") },
+      { layout: "normal", caption: "A student shares her thoughts with the guests.", image: img("gallery-n-speech", 960, 540, "A smiling schoolgirl speaks into a microphone, with guests seated behind her.") },
+      { layout: "wide", caption: "Students write their answers while guests look on.", image: img("gallery-n-table", 960, 640, "Schoolgirls write at a table while a host reads from a sheet and guests sit behind.") },
+      { layout: "wide", caption: "Students wait for their sanitary products, Epe.", image: img("gallery-queue", 960, 640, "Schoolgirls queue in a courtyard while a volunteer prepares their sanitary products.") },
+      { layout: "normal", caption: "Unloading drinks and supplies for an outreach day.", image: img("gallery-n-supplies", 960, 540, "Girls and volunteers carry packs of drinks from a bus under the trees.") },
+      { layout: "normal", caption: "A guest speaker addresses the students.", image: img("gallery-n-guest", 960, 540, "A woman in glasses speaks into a microphone in front of a Victoria's Wellness banner.") },
+      { layout: "wide", caption: "The Victoria's Wellness team with school staff and partners.", image: img("gallery-n-team", 960, 540, "Eight adults in colourful clothes stand together in front of a school building.") },
     ],
     instagramTitle: "More on Instagram",
     instagramText: "Follow @vwigcare for outreach news and photos",

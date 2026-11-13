@@ -126,4 +126,5 @@ html.motion .route__next.is-reached::before { background: var(--rose-200); trans
   .route__stop::before { left: calc(-1 * (var(--dot) + var(--s-5))); }
   .route__next::before { left: calc(-1 * (var(--dot) + var(--s-5)) - 4px); }
   .route__next .btn { width: 100%; }
+  .route__stop { padding-block: var(--s-3); }
 }

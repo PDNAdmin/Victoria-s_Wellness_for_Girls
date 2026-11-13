@@ -14,7 +14,11 @@ function initVideo() {
       video.play().catch(() => {}); // if the browser refuses, the controls are still there
       video.focus();
     });
-    video.addEventListener("play", () => fig.classList.add("is-playing"));
+    video.addEventListener("play", () => {
+      fig.classList.add("is-playing");
+      // One video at a time: starting one pauses the others
+      document.querySelectorAll("[data-video-el]").forEach((v) => v !== video && v.pause());
+    });
   });
 }
 

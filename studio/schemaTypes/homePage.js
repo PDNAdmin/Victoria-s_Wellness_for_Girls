@@ -176,6 +176,22 @@ export const homePage = defineType({
         description: "Past dates are hidden automatically at the next site update. Each one is also published as an event for Google and AI search.",
       }),
       str("instagramLabel", "Instagram button text"), str("askLabel", "\"Ask about an outreach\" link text"),
+      str("clipsTitle", "Short clips heading"),
+      str("clipsIntro", "Short clips intro"),
+      defineField({
+        name: "clips", title: "Short clips", type: "array",
+        description: "Short videos shown under the film, three across on computers. MP4, ideally under 5 MB each.",
+        of: [defineArrayMember({
+          type: "object", name: "clip",
+          fields: [
+            defineField({ name: "video", title: "Video", type: "file", options: { accept: "video/mp4" }, validation: (r) => r.required() }),
+            photo("poster", "Cover image", { description: "Shown before the video plays." }),
+            str("caption", "Caption"),
+            str("label", "Description (for screen readers)", { description: "e.g. \"Video: a student gives a speech at the Benevolence Tour.\"" }),
+          ],
+          preview: { select: { title: "caption", media: "poster" } },
+        })],
+      }),
     ]),
 
     section("gallery", "Gallery", [

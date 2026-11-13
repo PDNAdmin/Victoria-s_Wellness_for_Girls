@@ -67,9 +67,9 @@
 .value__name { position: relative; font-size: 1.25rem; line-height: 1.25; letter-spacing: -0.02em; }
 .value__text { position: relative; color: var(--text-muted); font-size: var(--fs-small); line-height: 1.55; max-width: 34ch; }
 
-/* Floral flourish in the corner: quiet until hover */
+/* Floral flourish in the empty top corner beside the icon, clear of the text: quiet until hover */
 .value__flourish {
-  position: absolute; right: -22px; bottom: -22px;
+  position: absolute; right: -24px; top: -24px;
   width: 96px; height: 96px;
   fill: none; stroke: var(--flourish); stroke-width: 1.6; color: var(--flourish);
   opacity: .4;
@@ -87,6 +87,16 @@
   .values__media { max-width: 560px; }
 }
 @media (max-width: 599px) {
-  .values__list { grid-template-columns: minmax(0, 1fr); }
-  .value { padding: var(--s-5) var(--s-5) var(--s-6); }
+  .values__list { grid-template-columns: minmax(0, 1fr); gap: var(--s-3); }
+  /* Icon beside the name and text: ten values read as one list, not ten tall cards */
+  .value {
+    grid-template-columns: 44px minmax(0, 1fr);
+    column-gap: var(--s-4); row-gap: var(--s-1);
+    padding: var(--s-5);
+  }
+  .value__icon { grid-row: span 2; width: 44px; height: 44px; margin: 0; }
+  .value__icon svg { width: 24px; height: 24px; }
+  .value__name { font-size: 1.125rem; align-self: center; }
+  .value__text { max-width: none; }
+  .value__flourish { width: 72px; height: 72px; right: -20px; top: -20px; opacity: .3; }
 }

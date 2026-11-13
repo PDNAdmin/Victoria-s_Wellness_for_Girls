@@ -136,9 +136,10 @@
   fill: none; stroke: var(--info); stroke-width: 2; stroke-linecap: round;
 }
 
-/* ---------- Short screens: the left column cannot fit, so it scrolls normally ---------- */
-@media (max-height: 740px) {
-  .programmes__sticky { position: static; }
+/* ---------- Short screens (most laptops): the photo gives up height so the column still fits and stays in view.
+   src/sticky-fit.js catches anything taller than the screen. ---------- */
+@media (min-width: 900px) {
+  .programmes__photo { max-height: max(170px, calc(100svh - 400px)); }
 }
 
 /* ---------- Tablet and phone ---------- */
@@ -148,7 +149,12 @@
   .programmes__media { max-width: 560px; }
 }
 @media (max-width: 560px) {
-  .prog { grid-template-columns: minmax(0, 1fr); gap: var(--s-4); padding: var(--s-6) var(--s-4); }
-  .prog__icon { width: 48px; height: 48px; }
+  /* Icon beside the name, not above it: seven programmes stay a readable list instead of a long scroll */
+  .prog { grid-template-columns: 40px minmax(0, 1fr); gap: var(--s-4); padding: var(--s-5) 0; border-radius: 0; }
+  .prog__icon { width: 40px; height: 40px; }
+  .prog__icon svg { width: 22px; height: 22px; }
+  .prog__name { font-size: 1.25rem; }
+  .prog__text { margin-top: var(--s-2); }
+  .prog__for { margin-top: var(--s-3); }
   .programmes__photo { border-radius: var(--r-2); }
 }

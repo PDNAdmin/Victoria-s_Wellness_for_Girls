@@ -57,6 +57,16 @@ const JOBS = [
   { name: "gallery-mic", src: "assets/videos/1000964964.jpg", crops: { main: { full: true, widths: [480, 960, 1600] } } },
   { name: "gallery-ceremony", src: "assets/videos/1000037882.jpg", crops: { main: { full: true, widths: [480, 960, 1600] } } },
   { name: "gallery-session", src: "assets/videos/1000139391.jpg", crops: { main: { full: true, widths: [480, 960, 1600] } } },
+  // November 2026: the Benevolence Tour (girls' competition and speeches), supplies and partners.
+  // These sources are 960–1280 wide, so the "1600" file is the original size (never enlarged).
+  { name: "gallery-n-table", src: "assets/2026-11/a lot of girls writing close-up.jpeg", crops: { main: { full: true, widths: [480, 960, 1600] } } },
+  { name: "gallery-n-speaker", src: "assets/2026-11/girl speaking.jpeg", crops: { main: { full: true, widths: [480, 960, 1600] } } },
+  { name: "gallery-n-speech", src: "assets/2026-11/girl talking.jpeg", crops: { main: { full: true, widths: [480, 960, 1600] } } },
+  { name: "gallery-n-writing", src: "assets/2026-11/girl writing.jpeg", crops: { main: { full: true, widths: [480, 960, 1600] } } },
+  { name: "gallery-n-closeup", src: "assets/2026-11/girls writing close-up.jpeg", crops: { main: { full: true, widths: [480, 960, 1600] } } },
+  { name: "gallery-n-supplies", src: "assets/2026-11/people entering bus.jpeg", crops: { main: { full: true, widths: [480, 960, 1600] } } },
+  { name: "gallery-n-team", src: "assets/2026-11/pictures of some people and victrual.jpeg", crops: { main: { full: true, widths: [480, 960, 1600] } } },
+  { name: "gallery-n-guest", src: "assets/2026-11/woman speaking.jpeg", crops: { main: { full: true, widths: [480, 960, 1600] } } },
 ];
 
 for (const job of JOBS) {
@@ -70,7 +80,7 @@ for (const job of JOBS) {
       Object.assign(c, { left: 0, top: 0, width: m.width, height: m.height });
     }
     for (const w of c.widths) {
-      const base = sharp(job.src).rotate().extract({ left: c.left, top: c.top, width: c.width, height: c.height }).resize({ width: w });
+      const base = sharp(job.src).rotate().extract({ left: c.left, top: c.top, width: c.width, height: c.height }).resize({ width: w, withoutEnlargement: true });
       const file = `${OUT}/${job.name}-${crop}-${w}`;
       await base.clone().avif({ quality: 52, effort: 6 }).toFile(`${file}.avif`);
       await base.clone().webp({ quality: 74 }).toFile(`${file}.webp`);

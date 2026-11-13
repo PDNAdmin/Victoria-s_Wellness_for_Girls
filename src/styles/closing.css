@@ -120,6 +120,7 @@
   position: sticky; top: calc(76px + var(--s-6));
   font-family: var(--font-display); font-weight: 600;
   font-size: var(--fs-h3); line-height: 1.3; color: var(--ink-900);
+  text-wrap: balance;
 }
 .involved__closing em { font-style: italic; font-weight: 500; color: var(--green-700); }
 
@@ -223,7 +224,32 @@
 .upcoming h3 { font-size: var(--fs-h3); }
 .upcoming p { margin-top: var(--s-4); }
 .upcoming__actions { display: grid; justify-items: start; gap: var(--s-4); margin-top: var(--s-6); }
-.upcoming__actions .btn { white-space: normal; text-align: center; line-height: 1.2; padding-block: .6rem; }
+/* The full card width, so "Follow us on Instagram (@vwigcare)" fits on one line */
+.upcoming__actions .btn { justify-self: stretch; white-space: normal; text-align: center; line-height: 1.2; padding-block: .6rem; padding-inline: 1.25rem; }
+@media (min-width: 900px) { .upcoming { padding: clamp(1.75rem, 2.4vw, 2.5rem); } }
+
+/* ---------- Short clips under the film ---------- */
+.clips { margin-top: var(--block-gap); padding-top: clamp(2rem, 4vw, 3rem); border-top: 1px solid var(--line); }
+.clips__head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--s-2) var(--s-6); }
+.clips__title { font-size: var(--fs-h3); line-height: 1.2; }
+.clips__intro { color: var(--text-muted); font-size: var(--fs-small); }
+.clips__list {
+  list-style: none; margin: var(--s-6) 0 0; padding: 0;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 1.75rem);
+}
+.video--clip .video__frame { border-radius: var(--r-2); box-shadow: var(--shadow-1); }
+.video--clip .caption { margin-top: var(--s-3); }
+.video .video__play--round {
+  inset: 0; margin: auto;
+  width: 64px; height: 64px; min-height: 0; padding: 0; justify-content: center;
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+}
+.video .video__play--round .video__play-icon { width: 48px; height: 48px; }
+.video .video__play--round:active { transform: scale(.96); }
+@media (max-width: 599px) {
+  .clips__list { grid-template-columns: minmax(0, 1fr); }
+}
 
 /* ---------- 10b Gallery ---------- */
 .gallery { padding-block: var(--section-y); }
@@ -434,4 +460,13 @@
   background: var(--cream-50); color: var(--ink-900);
   font-size: var(--fs-label); font-weight: 700; max-width: calc(100% - 2 * var(--s-5));
 }
-@media (max-width: 599px) { .impact__photo { aspect-ratio: 4 / 3; } }
+/* Phones: the caption pill would cover most of a small photo, so it sits under it instead */
+@media (max-width: 599px) {
+  .impact__photo { aspect-ratio: auto; background: none; overflow: visible; border-radius: 0; }
+  .impact__photo picture { aspect-ratio: 4 / 3; border-radius: var(--r-2); overflow: hidden; background: var(--green-800); }
+  .impact__photo figcaption {
+    position: static; max-width: none; margin-top: var(--s-4); padding: 0;
+    background: none; color: var(--on-green-muted);
+    font-weight: 400; font-size: var(--fs-small); line-height: 1.5;
+  }
+}

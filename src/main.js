@@ -8,6 +8,7 @@ import { initForms } from "./forms.js";
 import { initMediaUI } from "./media-ui.js";
 import { initGallery } from "./gallery.js";
 import { initAnnouncement } from "./announcement.js";
+import { initStickyFit } from "./sticky-fit.js";
 
 // Scripts are running: cancel the "show everything" fallback from index.html
 clearTimeout(window.__motionFallback);
@@ -91,6 +92,7 @@ initForms();
 initMediaUI();
 initGallery();
 initAnnouncement();
+initStickyFit();
 
 /* ---------- Motion ---------- */
 startSmoothScroll();

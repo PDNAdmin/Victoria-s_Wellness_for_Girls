@@ -10,6 +10,8 @@ const CHECK = '<span class="form-done__icon" aria-hidden="true"><svg viewBox="0 
 const motif = (name, cls) => `<svg class="motif motif--${name}${cls}" data-reveal="motif" focusable="false"><use href="#m-${name}"/></svg>`;
 const linkArrow = (l, extra = "") => `<a class="link-arrow" ${linkAttrs(l.href)}${extra}>${esc(l.label)}${ARROW}</a>`;
 const fmt = (n) => Number(n || 0).toLocaleString("en-GB");
+// Headings: never split a hyphenated word ("community-/oriented") across two lines
+const keepHyphenated = (text) => esc(text).replace(/[^\s-]+(?:-[^\s-]+)+/g, (w) => `<span class="nobr">${w}</span>`);
 
 export function contactLinks(s) {
   const wa = `https://wa.me/${String(s.whatsapp || "").replace(/\D/g, "")}`;
@@ -153,7 +155,7 @@ ${(hero.buttons || []).map((b) => `            <a class="btn btn-${esc(b.style |
         <div class="about__intro" data-reveal-group>
           <div class="about__text">
             ${when(ab.eyebrow, () => `<p class="eyebrow" data-reveal="rise">${esc(ab.eyebrow)}</p>`)}
-            <h2 class="about__title" id="about-title" data-reveal="rise">${esc(ab.title)}</h2>
+            <h2 class="about__title${String(ab.title || "").length > 60 ? " about__title--long" : ""}" id="about-title" data-reveal="rise">${keepHyphenated(ab.title)}</h2>
             ${when(ab.body, () => `<p class="about__body" data-reveal="rise">${esc(ab.body)}</p>`)}
             ${when(ab.linkLabel && ab.linkHref, () => `<a class="link-arrow" ${linkAttrs(ab.linkHref)} data-reveal="rise">${esc(ab.linkLabel)}${ARROW}</a>`)}
           </div>
@@ -322,7 +324,7 @@ ${im.checks.map((c) => `            <li>${esc(c)}</li>`).join("\n")}
         <ul class="values__list" role="list">
 ${(va.items || []).map((v) => `          <li class="value value--${esc(v.color || "sage")}" data-reveal="draw">
             <span class="value__icon">${iconSvg(v.icon, { draw: true })}</span>
-            <h3 class="value__name">${esc(v.name)}</h3>
+            <h3 class="value__name">${keepHyphenated(v.name)}</h3>
             <p class="value__text">${esc(v.text)}</p>
             <svg class="value__flourish" aria-hidden="true" focusable="false"><use href="#m-flower"/></svg>
           </li>`).join("\n")}
@@ -601,6 +603,31 @@ ${dn.uses.map((u) => `            <li data-reveal="rise">${esc(u)}</li>`).join("
                 ${when(e.description, () => `<span class="event__text">${esc(e.description)}</span>`)}
               </li>`;
   };
+  // Short clips under the film: each loads nothing until played, and keeps its sound
+  const clips = (ou.clips || []).map((c) => ({ ...c, src: media.file(c.video), poster: media.src(c.poster, 960) })).filter((c) => c.src);
+  const clipsHtml = !clips.length ? "" : `
+        <div class="clips">
+          <div class="clips__head" data-reveal-group>
+            ${when(ou.clipsTitle, () => `<h3 class="clips__title" data-reveal="rise">${esc(ou.clipsTitle)}</h3>`)}
+            ${when(ou.clipsIntro, () => `<p class="clips__intro" data-reveal="rise">${esc(ou.clipsIntro)}</p>`)}
+          </div>
+          <ul class="clips__list" role="list">
+${clips.map((c) => `            <li class="clip" data-reveal="rise">
+              <figure class="video video--clip" data-video>
+                <div class="video__frame">
+                  <video preload="none" playsinline controls${c.poster ? ` poster="${esc(c.poster)}"` : ""} width="848" height="478" data-video-el
+                         aria-label="${esc(c.label || c.caption)}">
+                    <source src="${esc(c.src)}" type="video/mp4">
+                  </video>
+                  <button class="video__play video__play--round" type="button" data-video-play aria-label="Play: ${esc(c.caption || c.label)}">
+                    <span class="video__play-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+                  </button>
+                </div>
+                ${when(c.caption, () => `<figcaption class="caption">${esc(c.caption)}</figcaption>`)}
+              </figure>
+            </li>`).join("\n")}
+          </ul>
+        </div>`;
   const outreachHtml = `
     <section class="outreach" id="outreach" aria-labelledby="outreach-title">
       <div class="wrap">
@@ -635,6 +662,7 @@ ${dn.uses.map((u) => `            <li data-reveal="rise">${esc(u)}</li>`).join("
             </div>
           </div>
         </div>
+${clipsHtml}
       </div>
     </section>`;
 

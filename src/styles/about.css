@@ -24,6 +24,14 @@
   line-height: 1.12;
   max-width: 15ch;
 }
+/* A sentence-length heading (over ~60 characters) steps down a size and takes a wider measure,
+   so it reads as a statement instead of a column of giant words */
+.about__title--long {
+  font-size: clamp(1.625rem, 1.2rem + 1.25vw, 2.25rem);
+  line-height: 1.18;
+  max-width: 24ch;
+}
+.nobr { white-space: nowrap; }
 .about__body {
   margin-top: var(--head-gap);
   max-width: 46ch;
